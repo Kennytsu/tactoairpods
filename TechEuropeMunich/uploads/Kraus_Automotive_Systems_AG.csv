@@ -1,0 +1,7 @@
+Supplier,Year,Purchase_Volume_EUR,Price_Index_Change,Service_Score,Delivery_Reliability,Quality_Score,Cost_Factor_Change,Negotiation_Topic,Negotiation_Result,Buyer_Argument,Supplier_Argument
+Kraus Automotive Systems AG,2020,1200000.0,2,80,88,85,-5,,,Material cost decrease → 5% discount justified,Automation investments → stability priority
+Kraus Automotive Systems AG,2021,2100000.0,5,82,85,86,-12,,,Material cost decrease → 5% discount justified,Automation investments → stability priority
+Kraus Automotive Systems AG,2022,2400000.0,8,81,83,84,-8,,,Material cost decrease → 5% discount justified,Automation investments → stability priority
+Kraus Automotive Systems AG,2023,3300000.0,6,78,80,83,-10,,,Material cost decrease → 5% discount justified,Automation investments → stability priority
+Kraus Automotive Systems AG,2024,3600000.0,3,77,76,82,-6,Contract renewal discussion,Supplier promised 5% cost adjustment next term,Material cost decrease → 5% discount justified,Automation investments → stability priority
+Kraus Automotive Systems AG,2025,4500000.0,0,75,72,82,0,,,Material cost decrease → 5% discount justified,Automation investments → stability priority

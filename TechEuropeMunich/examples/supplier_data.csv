@@ -1,0 +1,19 @@
+supplier_name,supplier_id,product_name,sku,unit_price,delivery_time_days,quality_score,min_order_quantity,last_order_date,contract_status
+ACME Manufacturing,ACM001,Industrial Valves,VAL-001,125.50,14,8.5,100,2024-01-15,Active
+ACME Manufacturing,ACM001,Pressure Gauges,GAU-002,45.75,10,9.2,50,2024-01-20,Active
+ACME Manufacturing,ACM001,Pipe Fittings,FIT-003,12.30,7,7.8,200,2024-02-01,Active
+ACME Manufacturing,ACM001,Safety Equipment,SAF-004,89.90,21,9.0,25,2024-01-10,Active
+ACME Manufacturing,ACM001,Control Systems,CTL-005,450.00,28,8.7,10,2024-01-25,Active
+TechCorp Solutions,TEC002,Electronic Components,ELC-101,23.45,5,8.9,500,2024-02-05,Active
+TechCorp Solutions,TEC002,Circuit Boards,CIR-102,78.90,12,8.3,100,2024-01-30,Active
+TechCorp Solutions,TEC002,Power Supplies,POW-103,156.75,15,8.6,75,2024-02-10,Active
+TechCorp Solutions,TEC002,Sensors,SEN-104,34.20,8,9.1,150,2024-01-28,Active
+Global Logistics,GLO003,Shipping Containers,CON-201,1200.00,30,7.5,5,2024-01-12,Active
+Global Logistics,GLO003,Freight Services,FRE-202,0.85,3,8.8,1000,2024-02-15,Active
+Global Logistics,GLO003,Warehouse Equipment,WAR-203,890.50,20,8.4,15,2024-01-18,Active
+Quality Materials,QUA004,Raw Materials,RAW-301,45.60,14,9.3,200,2024-02-01,Active
+Quality Materials,QUA004,Chemicals,CHE-302,67.80,21,8.7,100,2024-01-22,Active
+Quality Materials,QUA004,Adhesives,ADH-303,23.40,7,8.9,300,2024-02-08,Active
+
+
+

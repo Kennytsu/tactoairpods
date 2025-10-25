@@ -1,0 +1,55 @@
+SUPPLIER CONTRACT AGREEMENT
+
+Contract Number: CNT-2024-001
+Supplier: ACME Manufacturing Corp.
+Contract Date: January 15, 2024
+Valid Until: December 31, 2024
+
+TERMS AND CONDITIONS
+
+1. PRODUCTS AND PRICING
+   - Industrial Valves (VAL-001): $125.50 per unit
+   - Pressure Gauges (GAU-002): $45.75 per unit  
+   - Pipe Fittings (FIT-003): $12.30 per unit
+   - Safety Equipment (SAF-004): $89.90 per unit
+   - Control Systems (CTL-005): $450.00 per unit
+
+2. DELIVERY TERMS
+   - Standard delivery time: 14-28 days
+   - Rush orders: Additional 25% surcharge
+   - Minimum order quantity: 100 units per product line
+   - Free shipping on orders over $10,000
+
+3. QUALITY STANDARDS
+   - All products must meet ISO 9001 standards
+   - Quality score minimum: 8.0/10
+   - Defect rate maximum: 2%
+   - 30-day warranty on all products
+
+4. PAYMENT TERMS
+   - Net 30 days payment terms
+   - 2% discount for payment within 10 days
+   - Volume discounts available:
+     * 5% discount for orders over $50,000
+     * 10% discount for orders over $100,000
+     * 15% discount for orders over $250,000
+
+5. SUPPLIER PERFORMANCE
+   - On-time delivery target: 95%
+   - Quality score target: 8.5/10
+   - Customer satisfaction target: 90%
+   - Quarterly performance reviews
+
+6. TERMINATION CLAUSE
+   - Either party may terminate with 60 days notice
+   - Immediate termination for quality issues
+   - Force majeure provisions apply
+
+This contract represents our commitment to providing high-quality industrial equipment with competitive pricing and reliable delivery schedules.
+
+Signed:
+ACME Manufacturing Corp.
+Date: January 15, 2024
+
+
+
