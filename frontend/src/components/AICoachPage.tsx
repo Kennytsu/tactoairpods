@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Mic, Circle, Check, X, Pause, Play, ArrowLeft } from "lucide-react";
+import { useFinancialContext } from "@/hooks/useFinancialContext";
 
 export default function AINegotiationCoachPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session");
+  const financialContext = useFinancialContext();
 
   {/* TODO: pass sessionId & config to coaching runtime */}
 
@@ -130,7 +132,7 @@ export default function AINegotiationCoachPage() {
                 </div>
                 <div className="flex justify-between items-start gap-4">
                   <span className="text-sm font-medium text-muted-foreground">Your target:</span>
-                  <span className="text-sm text-primary font-medium text-right">-8% vs. their ask</span>
+                  <span className="text-sm text-primary font-medium text-right">{financialContext.formatPercentage(financialContext.targetCounter - financialContext.supplierAsk)} vs. their ask</span>
                 </div>
               </div>
             </div>
@@ -174,15 +176,15 @@ export default function AINegotiationCoachPage() {
               <div className="space-y-3">
                 <div className="flex justify-between items-start gap-4">
                   <span className="text-sm font-medium text-muted-foreground">Annual spend at current price:</span>
-                  <span className="text-sm text-foreground font-semibold">€12.4M</span>
+                  <span className="text-sm text-foreground font-semibold">{financialContext.formatCurrency(financialContext.currentSpend)}</span>
                 </div>
                 <div className="flex justify-between items-start gap-4">
-                  <span className="text-sm font-medium text-muted-foreground">Cost impact of +12% ask:</span>
-                  <span className="text-sm text-destructive font-semibold">+€1.4M / year</span>
+                  <span className="text-sm font-medium text-muted-foreground">Cost impact of {financialContext.formatPercentage(financialContext.supplierAsk)} ask:</span>
+                  <span className="text-sm text-destructive font-semibold">+{financialContext.formatCurrency(financialContext.costImpact)} / year</span>
                 </div>
                 <div className="flex justify-between items-start gap-4">
                   <span className="text-sm font-medium text-muted-foreground">Target counter:</span>
-                  <span className="text-sm text-success font-semibold">+6% max = save ~€700k / year</span>
+                  <span className="text-sm text-success font-semibold">{financialContext.formatPercentage(financialContext.targetCounter)} max = save ~{financialContext.formatCurrency(financialContext.potentialSavings)} / year</span>
                 </div>
               </div>
               <p className="text-xs text-muted-foreground pt-3 border-t border-border mt-4">
@@ -318,23 +320,23 @@ export default function AINegotiationCoachPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div className="border border-border rounded-lg p-4 bg-background">
                   <div className="text-xs text-muted-foreground mb-1">Savings vs Supplier Ask</div>
-                  <div className="text-lg font-semibold text-foreground">€700k / year</div>
+                  <div className="text-lg font-semibold text-foreground">{financialContext.formatCurrency(financialContext.potentialSavings)} / year</div>
                 </div>
                 <div className="border border-border rounded-lg p-4 bg-background">
                   <div className="text-xs text-muted-foreground mb-1">Risk Exposure</div>
-                  <div className="text-lg font-semibold text-destructive">High (supply continuity mentioned)</div>
+                  <div className="text-lg font-semibold text-destructive">{financialContext.riskExposure} (supply continuity mentioned)</div>
                 </div>
                 <div className="border border-border rounded-lg p-4 bg-background">
                   <div className="text-xs text-muted-foreground mb-1">Leverage Position</div>
-                  <div className="text-lg font-semibold text-success">Strong — we're 18% of their total volume</div>
+                  <div className="text-lg font-semibold text-success">{financialContext.leveragePosition} — we're 18% of their total volume</div>
                 </div>
                 <div className="border border-border rounded-lg p-4 bg-background">
                   <div className="text-xs text-muted-foreground mb-1">Next Escalation Owner</div>
-                  <div className="text-lg font-semibold text-foreground">CPO / Head of Procurement</div>
+                  <div className="text-lg font-semibold text-foreground">{financialContext.nextEscalationOwner}</div>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed border-t border-border pt-4">
-                This negotiation is financially material. If we accept +12%, cost impact is ~€1.4M/year. Coach recommends holding at +6% cap and escalating if they won't move.
+                This negotiation is financially material. If we accept {financialContext.formatPercentage(financialContext.supplierAsk)}, cost impact is ~{financialContext.formatCurrency(financialContext.costImpact)}/year. Coach recommends holding at {financialContext.formatPercentage(financialContext.targetCounter)} cap and escalating if they won't move.
               </p>
             </div>
 
