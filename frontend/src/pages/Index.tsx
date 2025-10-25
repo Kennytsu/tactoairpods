@@ -19,15 +19,26 @@ const Index = () => {
             Experience real-time AI guidance during supplier negotiations
           </p>
         </div>
-        <Link to="/ai-coach">
-          <Button 
-            size="lg" 
-            className="bg-gradient-hero hover:shadow-glow transition-all duration-200 hover:scale-105 text-background font-medium"
-          >
-            View Demo
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </Link>
+        <div className="flex gap-4">
+          <Link to="/setup">
+            <Button 
+              size="lg" 
+              className="bg-gradient-hero hover:shadow-glow transition-all duration-200 hover:scale-105 text-background font-medium"
+            >
+              Setup Session
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+          <Link to="/ai-coach">
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="hover:bg-muted"
+            >
+              View Demo
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
