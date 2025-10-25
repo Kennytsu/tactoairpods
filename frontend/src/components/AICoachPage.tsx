@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Mic, Circle, Check, X, Pause, Play, ArrowLeft } from "lucide-react";
+// import { createExampleAgent } from "../beyond-presence-avatars/create-agent.js";
 
 export default function AINegotiationCoachPage() {
   const navigate = useNavigate();
@@ -26,6 +27,74 @@ export default function AINegotiationCoachPage() {
   const [showFloatingCoach, setShowFloatingCoach] = useState(false);
   const [isListening, setIsListening] = useState(true);
   const callWindowRef = useRef<HTMLDivElement>(null);
+
+  // Beyond Presence agent state
+  const [agentId, setAgentId] = useState<string | null>(null);
+  const [isLoadingAgent, setIsLoadingAgent] = useState(true);
+  const [agentError, setAgentError] = useState<string | null>(null);
+
+  // Create Beyond Presence agent using proxy server
+  const createAgentViaProxy = async () => {
+    const agentData = {
+      name: 'Jarvis',
+      avatar_id: '694c83e2-8895-4a98-bd16-56332ca3f449',
+      system_prompt: 'Talk to me about good holiday destinations.',
+      language: 'en',
+      greeting: 'Hello, what is your name?',
+      max_session_length_minutes: 30,
+      capabilities: [
+        { type: 'webcam_vision' },
+        { 
+          type: 'wakeup_mode',
+          triggers: ['hey', 'hi', 'hello']
+        }
+      ],
+      llm: {
+        type: 'openai'
+      }
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/api/create-agent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(agentData)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`Proxy request failed: ${response.status} ${response.statusText}. ${JSON.stringify(errorData)}`);
+      }
+
+      const agent = await response.json();
+      return agent;
+    } catch (error) {
+      console.error('Error creating agent via proxy:', error);
+      throw error;
+    }
+  };
+
+  // Create Beyond Presence agent on component mount
+  useEffect(() => {
+    const createAgent = async () => {
+      try {
+        setIsLoadingAgent(true);
+        setAgentError(null);
+        const agent = await createAgentViaProxy();
+        setAgentId(agent.id);
+        console.log('Agent created successfully:', agent);
+      } catch (error) {
+        console.error('Failed to create agent:', error);
+        setAgentError(error instanceof Error ? error.message : 'Failed to create agent');
+      } finally {
+        setIsLoadingAgent(false);
+      }
+    };
+
+    createAgent();
+  }, []);
 
   // {/* TODO: responsive logic for when to show PiP */}
   // Show mini-player when call window scrolls out of view (mainly on mobile)
@@ -92,17 +161,52 @@ export default function AINegotiationCoachPage() {
 
             {/* Large Avatar / Video Window */}
             <div className="relative rounded-xl overflow-hidden bg-gradient-avatar aspect-video flex items-center justify-center border border-border shadow-lg">
-              {/* TODO: Embed Beyond Presence avatar iframe/player here */}
-              <div className="text-center space-y-4 px-6">
-                <div className="relative w-20 h-20 mx-auto">
-                  <div className="absolute inset-0 rounded-full bg-primary/20 animate-pulse" />
-                  <div className="absolute inset-3 rounded-full bg-primary/30 animate-pulse" style={{ animationDelay: '150ms' }} />
-                  <div className="absolute inset-6 rounded-full bg-primary/50" />
+              {isLoadingAgent ? (
+                <div className="text-center space-y-4 px-6">
+                  <div className="relative w-20 h-20 mx-auto">
+                    <div className="absolute inset-0 rounded-full bg-primary/20 animate-pulse" />
+                    <div className="absolute inset-3 rounded-full bg-primary/30 animate-pulse" style={{ animationDelay: '150ms' }} />
+                    <div className="absolute inset-6 rounded-full bg-primary/50" />
+                  </div>
+                  <p className="text-white/90 font-medium text-lg">
+                    Creating AI Coach...
+                  </p>
                 </div>
-                <p className="text-white/90 font-medium text-lg">
-                  AI Coach Avatar Stream — Beyond Presence
-                </p>
-              </div>
+              ) : agentError ? (
+                <div className="text-center space-y-4 px-6">
+                  <div className="w-20 h-20 mx-auto rounded-full bg-destructive/20 flex items-center justify-center">
+                    <X className="h-8 w-8 text-destructive" />
+                  </div>
+                  <p className="text-white/90 font-medium text-lg">
+                    Failed to create agent
+                  </p>
+                  <p className="text-white/70 text-sm">
+                    {agentError}
+                  </p>
+                </div>
+              ) : agentId ? (
+                <iframe 
+                  src={`https://bey.chat/${agentId}`}
+                  width="100%" 
+                  height="100%" 
+                  frameBorder="0" 
+                  allowFullScreen
+                  allow="camera; microphone; fullscreen"
+                  style={{ border: 'none', maxWidth: '100%' }}
+                  className="rounded-xl"
+                />
+              ) : (
+                <div className="text-center space-y-4 px-6">
+                  <div className="relative w-20 h-20 mx-auto">
+                    <div className="absolute inset-0 rounded-full bg-primary/20 animate-pulse" />
+                    <div className="absolute inset-3 rounded-full bg-primary/30 animate-pulse" style={{ animationDelay: '150ms' }} />
+                    <div className="absolute inset-6 rounded-full bg-primary/50" />
+                  </div>
+                  <p className="text-white/90 font-medium text-lg">
+                    AI Coach Avatar Stream — Beyond Presence
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Bottom spacer */}
